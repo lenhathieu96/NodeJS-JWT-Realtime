@@ -1,0 +1,98 @@
+doctype html
+head
+  script(src='https://kit.fontawesome.com/2aa953cde5.js', crossorigin='anonymous')
+ 
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+
+  
+  
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+  link(rel="stylesheet", href="style.css")
+  
+  title ASM
+.container
+
+  // Alert
+  .alert.default(role='alert')
+    span#alertIcon
+      i.fas.fa-exclamation
+    span#alertMessage(style='font-size: 18px;') Thêm Sản Phẩm Thành Công
+  .text-center
+    img(src='./Image//logo.png', height='200', width='200')
+    h1 Quản Lý Sản Phẩm
+    hr
+  .row
+    .col-xs-12.col-sm-12.col-md-12.col-lg-12
+      .row.mt-15
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          button#btn-add.btn.btn-primary.mb-1.float-right.col-md-2(data-toggle='modal', data-target='#EditModal', data-prop='Thêm Mới')
+            i.fas.fa-plus.mr-2
+            |                        Thêm Mới
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12.text-center
+          table.table.table-bordered.w-auto#dataTable
+            thead
+              tr
+                th.text-center Mã Sản Phẩm
+                th.text-center(style='width: 15%') Tên
+                th.text-center(style='width: 10%') Tác Giả
+                th.text-center(style='width: 10%') Nhà Xuất Bản
+                th.text-center(style='width: 1%') Giá Tiền
+                th.text-center(style='width: 1%') Số Lượng
+                th(style='width: 20%')
+            tbody
+  // EditModal
+  #EditModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5.modal-title Modal title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          form
+            .form-group
+              label Tên:
+              input#txtName.form-control(type='text')
+              #errorName.alert.alert-danger(role='alert', style='display: none;')
+            .form-group
+              label Tác Giả: 
+              input#txtAuthor.form-control(type='text')
+              #errorAuthor.alert.alert-danger(role='alert', style='display: none;')
+            .form-group
+              label Nhà Xuất Bản: 
+              input#txtNXB.form-control(type='text')
+              #errorNXB.alert.alert-danger(role='alert', style='display: none;')
+            .form-group
+              label Giá: 
+              input#txtPrices.form-control(type='text')
+              #errorPrices.alert.alert-danger(role='alert', style='display: none;')
+            .form-group
+              label Số Lượng: 
+              input#txtQuantity.form-control(type='text')
+              #errorQuantity.alert.alert-danger(role='alert', style='display: none;')
+        .modal-footer
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+          button.btn.btn-primary.btn-edit(type='button') Save changes
+  #ConfirmModal.modal.fade.text-center(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5.modal-title Xác Nhận
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+         | Bạn Có Muốn Xóa Sản Phẩm Này Không
+        .modal-footer.text-center
+          button.btn.btn-secondary(type='button', data-dismiss='modal') Không
+          button.btn.btn-danger.btn-confirm(type='button') Có
+
+  
+
+script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+script(src='/socket.io/socket.io.js')
+script(src='./jquery.js')
+
+

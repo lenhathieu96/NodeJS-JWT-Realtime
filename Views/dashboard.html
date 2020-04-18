@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://kit.fontawesome.com/2aa953cde5.js" crossorigin="anonymous"></script>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <title>ASM</title>
+</head>
+<div class="container">
+    <div class="text-center"><img src="./Image//logo.png" height=200 width=200>
+        <h1>Quản Lý Sản Phẩm</h1>
+        <hr>
+    </div>
+
+   
+    <div class="row">
+
+       
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+            <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+                <div class="toast" style="position: absolute; top: 0; right: 0;">
+                  <div class="toast-header">
+                    <img src="..." class="rounded mr-2" alt="...">
+                    <strong class="mr-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+              </div>
+            <div class="row mt-15">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button class="btn btn-primary mb-1 float-right col-md-1" id="btn-add" data-toggle="modal"
+                        data-target="#EditModal" data-prop="Thêm Mới">
+                        <i class="fas fa-plus mr-1"></i>
+                        Thêm
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 14%" class="text-center">Mã Sản Phẩm</th>
+                                <th style="width: 14%" class="text-center">Tên</th>
+                                <th class="text-center" style="width: 14%">Tác Giả</th>
+                                <th class="text-center" style="width: 14%">Nhà Xuất Bản</th>
+                                <th class="text-center" style="width: 14%">Giá</th>
+                                <th class="text-center" style="width: 14%">Số Lượng</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Tuyệt Thế Đường Môn</td>
+                                <td>Trương Hình Dư</td>
+                                <td>Kim Lang</td>
+                                <td>600000</td>
+                                <td>100</td>
+                                <td>
+                                    <button class="btn btn-warning btn-update" data-toggle="modal"
+                                        data-target="#EditModal" data-prop="Chỉnh Sửa">
+                                        <i class="far fa-edit mr-1"></i>
+                                        Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-del">
+                                        <i class="far fa-trash-alt mr-1"></i>
+                                        Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Thiên Ngoại Hữu Thiên</td>
+                                <td>Trương Hình Dư</td>
+                                <td>Kim Lang</td>
+                                <td>600000</td>
+                                <td>100</td>
+                                <td>
+                                    <button class="btn btn-warning btn-update" data-toggle="modal"
+                                        data-target="#EditModal" data-prop="Chỉnh Sửa">
+                                        <i class="far fa-edit mr-1"></i>
+                                        Sửa
+                                    </button>
+                                    <button class="btn btn-danger btn-del" name="btn-del">
+                                        <i class="far fa-trash-alt mr-1"></i>
+                                        Xóa
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Alert-->
+    <div class="alert" role="alert">
+        <span><i class="fas fa-exclamation"></i></span>
+        <span id="alertMessage" style="font-size: 18px;" >Thêm Sản Phẩm Thành Công</span>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label>Tên: </label>
+                            <input class="form-control" type="text" id="txtName">
+                            <div class="alert alert-danger" id="errorName" role="alert" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tác Giả: </label>
+                            <input class="form-control" type="text" id="txtAuthor">
+                            <div class="alert alert-danger" id="errorAuthor" role="alert" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà Xuất Bản: </label>
+                            <input class="form-control" type="text" id="txtNXB">
+                            <div class="alert alert-danger" id="errorNXB" role="alert" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Giá: </label>
+                            <input class="form-control" type="text" id="txtPrices">
+                            <div class="alert alert-danger" id="errorPrices" role="alert" style="display: none;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Số Lượng: </label>
+                            <input class="form-control" type="text" id="txtQuantity">
+                            <div class="alert alert-danger" id="errorQuantity" role="alert" style="display: none;">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-edit">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="./jquery.js"></script>
