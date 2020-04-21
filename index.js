@@ -5,15 +5,22 @@ const bodyParser = require('body-parser')
 const app = express()
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
+const cookieParser = require('cookie-parser')
+
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser:true,useUnifiedTopology:true}).then(
     console.log("ket noi database thanh cong")
 )
 
+const key = require('./Key')
+
 const authRoute = require('./Route/authRoute')
 const productRoute = require('./Route/productRoute')
+const DashboardRoute = require('./Route/DashboardRoute')
+
 const checkToken = require('./MiddleWare/checkToken')
+const Validation = require('./MiddleWare/Validation')
 const controlProduct = require('./Controller/productController')
 
 const port = 3000
@@ -21,6 +28,7 @@ const port = 3000
 app.set('view engine','pug')
 app.set('views','./Views')
 
+app.use(cookieParser(key.Sign))
 app.use(express.static('Views'))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
@@ -28,6 +36,7 @@ app.use(bodyParser.json())
 
 app.use('/',authRoute)
 app.use('/product',checkToken.checkJWT,productRoute)
+app.use('/Dashboard',Validation.requireAuth,DashboardRoute)
 
 io.on('connect',(socket)=>{
     console.log('a user connected')
@@ -43,7 +52,7 @@ io.on('connect',(socket)=>{
     socket.on('insert',(data)=>{
        
        controlProduct.addProductIO(data)
-       .then(()=>{
+        .then(()=>{
            console.log('sucess')
            socket.emit('edit_result',true)
            controlProduct.getAll()

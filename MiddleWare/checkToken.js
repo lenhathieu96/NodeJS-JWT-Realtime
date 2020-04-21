@@ -4,7 +4,7 @@ module.exports.checkJWT = (req,res,next)=>{
     try{
         const token = req.headers.authorization
         console.log(token)
-        jwt.verify(token,secrectKey,(err,payload)=>{
+        jwt.verify(token,secrectKey.refreshKey,(err,payload)=>{
             console.log(payload)
             if(err){
                return res.status(400).send('User Undefined')

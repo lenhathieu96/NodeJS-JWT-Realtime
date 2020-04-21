@@ -1,4 +1,6 @@
-const {check,validationResult,checkSchema} = require('express-validator')
+const jwt = require('jsonwebtoken')
+const {refreshTokens} = require('../Controller/Token')
+const SecrectKey = require('../Key')
 
 module.exports.authValidate = (req,res,next)=>{
     var nameErrors=[]
@@ -20,31 +22,39 @@ module.exports.authValidate = (req,res,next)=>{
     next()
 }
 
-// module.exports.signupValidate = [checkSchema({
-//     name:{
-//         in:['body'],
-//         isLength:{
-//             errorMessage:"Do dai ko du",
-//             options:{min:7}
-//         }
-//     },
-//     password:{
-//         in:['body'],
-//         isLength:{
-//             errorMessage:"Do dai ko du",
-//             options:{min:7}
-//         }
-//     }
-// })],(req,res,next)=>{
-//     const Errors = validationResult(req)
-//     if(!Errors.isEmpty()){
-//         res.send('alo')
-//     }else{
-//         res.send('ola')
-//     }
-// }
 
+module.exports.requireAuth =  (req,res,next)=>{
+    //Kiểm tra token gửi lên từ cookies
+    if(req.signedCookies.token){
+        //xác minh token
+        jwt.verify(req.signedCookies.token,SecrectKey.Key, async (err,payload)=>{
+            //token lỗi, có thể do hết hạn hoặc do token giả
+            if(err){
+                //Kiểm tra refreshToken gửi lên từ cookies
+                console.log("incorrect token")
+                if(req.signedCookies.refreshToken){
+                    console.log(req.signedCookies.refreshToken)
+                    refreshTokens(req.signedCookies.refreshToken)
+                    .then(token=>console.log(token, "this is new token"))
+                    .catch(err=>{
+                        res.redirect('/')
+                    })
+                }else{
+                    console.log("refreshToken is Null")
+                    res.redirect('/')
+                }
+                return; 
+            }
+            //token hợp lê, chuyển sang middleware tiếp theo
+            console.log("correct token")
+            next()
+            return;
+        })
+        
+    }
+    else{
+        res.redirect('/')
+    }
 
-module.exports.requireAuth = (req,res,next)=>{
-    next()
+    
 }
